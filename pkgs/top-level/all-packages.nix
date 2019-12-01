@@ -10794,6 +10794,8 @@ in
 
   scmccid = callPackage ../development/libraries/scmccid { };
 
+  cctag = callPackage ../development/libraries/cctag { };
+
   ccrtp = callPackage ../development/libraries/ccrtp { };
 
   ccrtp_1_8 = callPackage ../development/libraries/ccrtp/1.8.nix { };
