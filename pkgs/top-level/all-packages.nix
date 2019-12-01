@@ -10602,6 +10602,8 @@ in
 
   aften = callPackage ../development/libraries/aften { };
 
+  alicevision = callPackage ../development/libraries/alicevision { };
+
   alure = callPackage ../development/libraries/alure { };
 
   agg = callPackage ../development/libraries/agg { };
