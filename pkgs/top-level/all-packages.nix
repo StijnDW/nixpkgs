@@ -13333,6 +13333,8 @@ in
     stdenv = gcc6Stdenv;
   };
 
+  opengv = callPackage ../development/libraries/opengv { };
+
   openh264 = callPackage ../development/libraries/openh264 { };
 
   openjpeg_1 = callPackage ../development/libraries/openjpeg/1.x.nix { };
