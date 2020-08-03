@@ -46,6 +46,7 @@ in {
     };
     services.dokuwiki."site2.local" = {
       aclUse = true;
+      usersFile = "/tmp/users.auth.php";
       superUser = "admin";
       nginx = {
         forceSSL = false;
@@ -70,8 +71,18 @@ in {
     machine.wait_for_open_port(80)
 
     machine.succeed("curl -sSfL http://site1.local/ | grep 'DokuWiki'")
+    machine.fail("curl -sSfL 'http://site1.local/doku.php?do=login' | grep 'Login'")
 
     machine.succeed("curl -sSfL http://site2.local/ | grep 'DokuWiki'")
     machine.succeed("curl -sSfL 'http://site2.local/doku.php?do=login' | grep 'Login'")
+
+    users_file = open("/tmp/users.auth.php", "a")
+    users_file.write(
+        "admin:$2y$10$ijdBQMzSVV20SrKtCna8gue36vnsbVm2wItAXvdm876sshI4uwy6S:Admin:admin@example.test:user\n"
+    )
+    users_file.close()
+    machine.succeed(
+        "curl -sSfL --data 'u=admin' --data 'p=password' 'http://site2.local/doku.php?do=login'"
+    )
   '';
 })
