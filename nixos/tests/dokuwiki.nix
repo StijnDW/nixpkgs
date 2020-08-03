@@ -70,6 +70,8 @@ in {
     machine.wait_for_open_port(80)
 
     machine.succeed("curl -sSfL http://site1.local/ | grep 'DokuWiki'")
+
     machine.succeed("curl -sSfL http://site2.local/ | grep 'DokuWiki'")
+    machine.succeed("curl -sSfL 'http://site2.local/doku.php?do=login' | grep 'Login'")
   '';
 })
